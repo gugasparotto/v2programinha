@@ -1,13 +1,16 @@
 #include <iostream>                          /* biblioteca para entrada e saida               */
 #include <windows.h>                         /* bibliteca para usar o windows                 */
 #include <conio.h>
-#include "headersFifa.h"
+#include "../../headersFifa.h"
 #include <ctime>
 #include <fstream>
 #include <stdio.h>
 #include <string>
+#include <chrono>
+#include <ctime> 
+#include <sstream>
 using namespace std;
-
+#pragma warning(disable : 4996)
 int main()
 {
 	
@@ -46,6 +49,7 @@ int main()
 	int e;
 	int compras = 0;
 	int compras1 = 0;
+
 	// Pause for 5 seconds.
 	Sleep(2000);
 	//for (int i = 0; i < buyNow; i++)
@@ -64,7 +68,18 @@ int main()
 	HDC hdc1 = GetDC(0);
 	COLORREF clrf1;
 
+	ofstream myfile;
+	stringstream nn;
+	string myfilename = "test";
+	int counter = 1;
+	nn << myfilename << counter << ".txt";
 
+	myfile.open(nn.str(), std::ios_base::app);
+
+	auto end = std::chrono::system_clock::now();
+	std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+	myfile << "Aberto programa em: " << std::ctime(&end_time) << "\n";
 
 	for (e = 0; e < quantidadeCiclo; e++)
 	{
@@ -72,14 +87,12 @@ int main()
 		std::cout << "Novo Ciclo \n \n";
 		for (int i = 0; i < buyNow; i++)
 		{
-
-
-
-
-			std::cout << "\n Novaaaaa Pesquisa \n \n";
+			std::cout << "\n Novaa Pesquisa \n \n";
+			myfile << "\n Novaa Pesquisa \n \n";
 			Sleep(150);
 			aumentarBin();
 			std::cout << "Aumentou bid \n";
+			myfile << "Aumentou bid \n";
 			Sleep(500);
 
 			pesquisar();
@@ -105,8 +118,8 @@ int main()
 			std::cout << "compras V2" << compras1 << endl;
 			for (int h = 1; h < 40; h++) { //valor de h= 70 e sleep =10
 				Sleep(20);
-				col = 1090;
-				lin = 291;
+				col = 1436;
+				lin = 318;
 				hdc = GetDC(0);/* reseta o hdc                                  */
 				clrf = GetPixel(hdc, col, lin);/* o valor int da cor nessa posção               */
 				int r = GetRValue(clrf);/* r recebe a quantidade de vermelho dessa pixel */
@@ -144,7 +157,6 @@ int main()
 				}
 				else {
 					if (r > 23 & b > 40) {
-						gravarTela();
 						std::cout << r;
 						std::cout << b;
 						std::cout << col;
@@ -162,7 +174,6 @@ int main()
 						}
 						Sleep(6000);
 						compras++;
-						gravarTela();
 						std::cout << "parou\n";
 						Sleep(3000);
 						std::cout << "Voltou\n";
@@ -212,6 +223,7 @@ int main()
 
 	}
 	// Exit normally
+	myfile.close();
 	cout << '\a';
 	cout << '\a';
 	cout << '\a';
