@@ -44,25 +44,26 @@ void aumentarBid()
 void comprar()
 {
 	INPUT ip;
-	for (int x = 0; x < 10; x++) {
-		Sleep(3);
-		// Set up a generic keyboard event.
-		ip.type = INPUT_KEYBOARD;
-		ip.ki.wScan = 0; // hardware scan code for key
-		ip.ki.time = 0;
-		ip.ki.dwExtraInfo = 0;
 
-		// Press the "M" key
-		ip.ki.wVk = 0x4D; // virtual-key code for the "a" key
-		ip.ki.dwFlags = 0; // 0 for key press
-		SendInput(1, &ip, sizeof(INPUT));
 
-		// Release the "M" key
-		ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
-		SendInput(1, &ip, sizeof(INPUT));
-	}
+	// Set up a generic keyboard event.
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
 
+	// Press the "M" key
+	ip.ki.wVk = 0x4D; // virtual-key code for the "a" key
+	ip.ki.dwFlags = 0; // 0 for key press
+	SendInput(1, &ip, sizeof(INPUT));
+
+	// Release the "M" key
+	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+	SendInput(1, &ip, sizeof(INPUT));
+	Sleep(2);
 }
+
+
 void voltar() {
 	INPUT ip;
 	// Set up a generic keyboard event.
@@ -80,6 +81,8 @@ void voltar() {
 	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
 	SendInput(1, &ip, sizeof(INPUT));
 }
+
+
 
 void aumentarBin() {
 	INPUT ip;
@@ -136,3 +139,22 @@ void resetBid() {
 	SendInput(1, &ip, sizeof(INPUT));
 }
 
+void gravarTela()
+{
+	INPUT ip;
+	// Set up a generic keyboard event.
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	// Press the "F7" key
+	ip.ki.wVk = 0x76; // virtual-key code for the "p" key
+	ip.ki.dwFlags = 0; // 0 for key press
+	SendInput(1, &ip, sizeof(INPUT));
+
+	// Release the "a" key
+	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+	SendInput(1, &ip, sizeof(INPUT));
+}
+#pragma once
