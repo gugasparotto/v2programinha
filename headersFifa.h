@@ -112,7 +112,7 @@ void pesquisar() {
 	ip.ki.dwExtraInfo = 0;
 
 	// Press the "X" key
-	ip.ki.wVk = 0x58; // virtual-key code for the "x" key
+	ip.ki.wVk = 0x54; // virtual-key code for the "t" key
 	ip.ki.dwFlags = 0; // 0 for key press
 	SendInput(1, &ip, sizeof(INPUT));
 
