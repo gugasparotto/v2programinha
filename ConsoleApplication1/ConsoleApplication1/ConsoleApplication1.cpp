@@ -13,8 +13,10 @@ int main(int argc, char* argv[])
 {
 	if (argc < 7)
 	{
-		std::cout << "Error. Usage: " << argv[0] << " colCarta linCarta colPergunta linPergunta colBan linBan\n";
-		exit(0);
+		if (argc != 2) {
+			std::cout << "Error!!!!\nUsage by command line: " << argv[0] << " colCarta linCarta colPergunta linPergunta colBan linBan\nUsage by file: " << argv[0] << " inputFile.txt\n";
+			exit(0);
+		}
 	}
 
 	// This structure will be used to create the keyboard
@@ -27,16 +29,61 @@ int main(int argc, char* argv[])
 	int colBan, linBan;
 	int ciclo;
 	int velocidadeProgram = 1000;
+	int num = 0;
+	if (argc < 7 && argc > 1) {
+		std::ifstream myfile;
+		myfile.open(argv[1]);
+		std::string myline;
+		if (myfile.is_open()) {
+			while (std::getline(myfile, myline)) { 
+				switch (num)
+				{
+				case 0:
+					colCarta = atoi(myline.c_str());
+					break;
+				case 1:
+					linCarta = atoi(myline.c_str());
+					break;
+				case 2:
+					colPergunta = atoi(myline.c_str());
+					break;
+				case 3:
+					linPergunta = atoi(myline.c_str());
+					break;
+				case 4:
+					colBan = atoi(myline.c_str());
+					break;
+				case 5:
+					linBan = atoi(myline.c_str());
+					break;
 
-	colCarta = atoi(argv[1]);
-	linCarta = atoi(argv[2]);
+				default:
+					break;
+				}
+				num++;
+			}
+			if (num != 6)
+			{
+				std::cout << "Error reading file.\n";
+				exit(0);
+			}
 
-	colPergunta = atoi(argv[3]);
-	linPergunta = atoi(argv[4]);
+		}
+		else {
+			std::cout << "Couldn't open file\n";
+		}
+	}
+	else {
 
-	colBan = atoi(argv[5]);
-	linBan = atoi(argv[6]);
+		colCarta = atoi(argv[1]);
+		linCarta = atoi(argv[2]);
 
+		colPergunta = atoi(argv[3]);
+		linPergunta = atoi(argv[4]);
+
+		colBan = atoi(argv[5]);
+		linBan = atoi(argv[6]);
+	}
 	cout << "colCarta: " << colCarta << "\nlinCarta: " << linCarta << "\ncolPergunta: " << colPergunta << "\nlinPergunta: " << linPergunta << "\ncolBan: " << colBan << "\nlinBan: " << linBan << "\n";
 
 	cout << "Velocidade do programa em ms:\n";
