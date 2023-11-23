@@ -9,16 +9,36 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
+	if (argc < 7)
+	{
+		std::cout << "Error. Usage: " << argv[0] << " colCarta linCarta colPergunta linPergunta colBan linBan\n";
+		exit(0);
+	}
 
 	// This structure will be used to create the keyboard
 	// input event.
 	INPUT ip;
 	int buyNow;
 
+	int colCarta, linCarta;										  /* coluna e linha da tela                        */
+	int colPergunta, linPergunta;
+	int colBan, linBan;
 	int ciclo;
 	int velocidadeProgram = 1000;
+
+	colCarta = atoi(argv[1]);
+	linCarta = atoi(argv[2]);
+
+	colPergunta = atoi(argv[3]);
+	linPergunta = atoi(argv[4]);
+
+	colBan = atoi(argv[5]);
+	linBan = atoi(argv[6]);
+
+	cout << "colCarta: " << colCarta << "\nlinCarta: " << linCarta << "\ncolPergunta: " << colPergunta << "\nlinPergunta: " << linPergunta << "\ncolBan: " << colBan << "\nlinBan: " << linBan << "\n";
+
 	cout << "Velocidade do programa em ms:\n";
 	cin >> velocidadeProgram;
 	cout << "até quanto vai: " << endl;
@@ -65,12 +85,9 @@ int main()
 	//}
 	//Sleep(9999);
 
-	int colCarta, linCarta;										  /* coluna e linha da tela                        */
 	POINT pt;											 /* para usar as coordenadas do mouse             */
 	HDC hdc = GetDC(0);									 /* HDC é o buffer da tela Toda                   */
 	COLORREF clrf;										 /* para trabalhar com cores                      */
-	int colPergunta, linPergunta;
-	int colBan, linBan;
 	POINT pt1;
 	HDC hdc1 = GetDC(0);
 	COLORREF clrf1;
