@@ -14,8 +14,8 @@ int main(int argc, char* argv[])
 	if (argc < 7)
 	{
 		if (argc != 2) {
-			std::cout << "Error!!!!\nUsage by command line: " << argv[0] << " colCarta linCarta colPergunta linPergunta colBan linBan\nUsage by file: " << argv[0] << " inputFile.txt\n";
-			exit(0);
+			std::cout << "Usage by command line: " << argv[0] << " colCarta linCarta colPergunta linPergunta colBan linBan\nUsage by file: " << argv[0] << " inputFile.txt\n";
+			std::cout << "Program will use by default the file input.txt\n";
 		}
 	}
 
@@ -30,9 +30,13 @@ int main(int argc, char* argv[])
 	int ciclo;
 	int velocidadeProgram = 1000;
 	int num = 0;
-	if (argc < 7 && argc > 1) {
+	if (argc < 7) {
 		std::ifstream myfile;
-		myfile.open(argv[1]);
+		if (argc == 2)
+			myfile.open(argv[1]);
+		else
+			myfile.open("input.txt");
+
 		std::string myline;
 		if (myfile.is_open()) {
 			while (std::getline(myfile, myline)) { 
@@ -70,7 +74,8 @@ int main(int argc, char* argv[])
 
 		}
 		else {
-			std::cout << "Couldn't open file\n";
+			std::cout << "Couldn't open file \n";
+			exit(0);
 		}
 	}
 	else {
