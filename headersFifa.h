@@ -104,6 +104,7 @@ void aumentarBin() {
 }
 
 void pesquisar() {
+	std::cout << "pesquisei \n";
 	INPUT ip;
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
@@ -115,6 +116,7 @@ void pesquisar() {
 	ip.ki.wVk = 0x54; // virtual-key code for the "t" key
 	ip.ki.dwFlags = 0; // 0 for key press
 	SendInput(1, &ip, sizeof(INPUT));
+	Sleep(100);
 
 	// Release the "X" key
 	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
